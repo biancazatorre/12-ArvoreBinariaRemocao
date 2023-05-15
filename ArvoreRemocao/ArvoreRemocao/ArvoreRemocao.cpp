@@ -272,7 +272,7 @@ void removerElementoArvore(NO* no, int valor) {
         else {
             filho = atual->dir;
         }
-        if (pai == NULL) { //não está funcionando, e cansei de tentar resolver!!
+        if (pai == NULL) {
             no = filho;
         }
 	else if (atual == pai->esq) {
