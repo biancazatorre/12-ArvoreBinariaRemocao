@@ -83,7 +83,7 @@ void menu()
 void inicializar()
 {
 
-	// provis�rio porque n�o libera a memoria usada pela arvore
+	// provisório porque não libera a memoria usada pela arvore
 	raiz = NULL;
 
 	cout << "Arvore inicializada \n";
@@ -247,13 +247,54 @@ void removerElementoArvore(NO* no, int valor) {
 	}
 
 
-	// caso 1: sem filhos	
-	
-
+	// caso 1: sem filhos
+	if (raiz == atual) {
+		raiz = NULL;
+		free(atual);
+		return;
+	}
+	if (atual->esq == NULL && atual->dir == NULL) {
+        if (atual == pai->esq) { 
+            pai->esq = NULL;
+        }
+        if (atual == pai->dir) {
+            pai->dir = NULL;
+        }
+        free(atual);
+        return;
+        }
 	// caso 2: um filho	
-	
-
+	if (atual->esq == NULL || atual->dir == NULL) {
+        NO* filho = NULL;
+        if (atual->esq != NULL) {
+            filho = atual->esq;
+        } 
+        else {
+            filho = atual->dir;
+        }
+        if (pai == NULL) { //não está funcionando, e cansei de tentar resolver!!
+            no = filho;
+        }
+	else if (atual == pai->esq) {
+            pai->esq = filho;
+        }
+	else {
+            pai->dir = filho;
+        }
+        free(atual);
+        return;
+    }
+    
 	// caso 3: dois filhos
+
+	// procura o elmento mais a esquerda da sub-arvore da direita
+	NO* sucessor = atual->dir;
+	NO* paiSucessor = atual;
+	while (sucessor->esq != NULL) {
+		paiSucessor = sucessor;
+		sucessor = sucessor->esq;
+	}
+ 
 
 	// procura o elmento mais a esquerda da sub-arvore da direita
 	NO* sucessor = atual->dir;
